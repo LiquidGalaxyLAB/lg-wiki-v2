@@ -179,7 +179,10 @@ function renderHome() {
       <h2>Ready to Dive In?</h2>
       <p>Join our global open-source community. Explore apps on the store or contribute your own documentation.</p>
       <div class="home-cta-buttons">
-        <button class="cta-primary" id="home-contribute-btn" onclick="window.location.hash='how-to-contribute-to-lg-wiki.md'">
+        <button class="cta-primary" id="home-docs-btn">
+          <span class="material-icons">menu_book</span> Read Documentation
+        </button>
+        <button class="cta-secondary" id="home-contribute-btn">
           <span class="material-icons">edit_note</span> How to Contribute
         </button>
         <a class="cta-secondary" href="https://store.liquidgalaxy.eu" target="_blank">
@@ -210,6 +213,33 @@ function renderHome() {
       </div>
     </div>
   `;
+
+  // Bind documentation reading CTA buttons
+  const navigateToFirstDoc = () => {
+    const firstPage = wikiIndex.pages && wikiIndex.pages.length > 0 ? wikiIndex.pages[0] : null;
+    if (firstPage) {
+      window.location.hash = firstPage.file;
+    } else {
+      window.location.hash = 'how-to-contribute-to-lg-wiki.md';
+    }
+  };
+
+  const heroDocsBtn = document.getElementById('hero-docs-btn');
+  if (heroDocsBtn) {
+    heroDocsBtn.addEventListener('click', navigateToFirstDoc);
+  }
+
+  const heroContributeBtn = document.getElementById('hero-contribute-btn');
+  if (heroContributeBtn) {
+    heroContributeBtn.addEventListener('click', () => {
+      window.location.hash = 'how-to-contribute-to-lg-wiki.md';
+    });
+  }
+
+  const homeDocsBtn = document.getElementById('home-docs-btn');
+  if (homeDocsBtn) {
+    homeDocsBtn.addEventListener('click', navigateToFirstDoc);
+  }
 
   // Bind the contribute button
   const ctaBtn = document.getElementById('home-contribute-btn');
