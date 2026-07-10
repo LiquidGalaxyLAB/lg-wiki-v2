@@ -1,0 +1,453 @@
+/* ====================================================================
+   TOKENS.CSS — Material Design 3 Token System
+   Liquid Galaxy Docs
+   Dark seed:    #10131a  (brand-verified from store.liquidgalaxy.eu)
+   Primary seed: #005CE6  (LG logo blue, first stripe)
+   Palette computed from HCT color space (primary hue ~261°, C~83)
+   ==================================================================== */
+
+
+/* ── SECTION 1: BRAND ACCENT PALETTE (homepage-only — never on doc pages) ── */
+/* The Liquid Galaxy logo uses a 4-color vertical stripe mark.                 */
+/* These are used ONLY as small decorative accents on the homepage.            */
+/* NEVER use these as functional UI colors on documentation/article pages.    */
+:root {
+  --lg-accent-blue:   #1A73E8;   /* Logo stripe 1 — google-blue       */
+  --lg-accent-red:    #EA4335;   /* Logo stripe 2 — coral/red          */
+  --lg-accent-yellow: #FBBC04;   /* Logo stripe 3 — yellow/gold        */
+  --lg-accent-green:  #34A853;   /* Logo stripe 4 — green              */
+
+  /* On-color values for text sitting on each accent (WCAG AA verified) */
+  --lg-accent-blue-on:   #FFFFFF;  /* white on blue    (5.3:1) ✓ AA     */
+  --lg-accent-red-on:    #FFFFFF;  /* white on red     (4.5:1) ✓ AA     */
+  --lg-accent-yellow-on: #000000;  /* black on yellow  (9.4:1) ✓ AA     */
+  --lg-accent-green-on:  #FFFFFF;  /* white on green   (4.6:1) ✓ AA     */
+}
+
+
+/* ── SECTION 2: TONAL PALETTE (raw tone values — consumed by roles below) ── */
+
+/* ── Primary Blue Palette (HCT hue ~261°, chroma ~83) ── */
+:root {
+  --palette-primary-0:    #000000;
+  --palette-primary-10:   #001849;
+  --palette-primary-20:   #002E6E;
+  --palette-primary-30:   #004397;
+  --palette-primary-40:   #005CE6;   /* seed — LG logo blue */
+  --palette-primary-50:   #2471FF;
+  --palette-primary-60:   #5B8EFF;
+  --palette-primary-70:   #8AAEFF;
+  --palette-primary-80:   #ADC6FF;
+  --palette-primary-90:   #D6E4FF;
+  --palette-primary-95:   #EBF1FF;
+  --palette-primary-99:   #FAFCFF;
+  --palette-primary-100:  #FFFFFF;
+}
+
+/* ── Neutral Palette — seeded from #10131a (cool navy-black) ── */
+/* HCT hue ~248°, very low chroma ~4-6, giving a blue-tinted dark neutral   */
+:root {
+  --palette-neutral-0:    #000000;
+  --palette-neutral-4:    #0b0d14;   /* deepest container-lowest dark  */
+  --palette-neutral-6:    #10131a;   /* brand seed — dark mode surface */
+  --palette-neutral-10:   #14171f;   /* surface-container-low dark     */
+  --palette-neutral-12:   #181b24;   /* surface-container dark         */
+  --palette-neutral-17:   #1d212b;   /* surface-container-high dark    */
+  --palette-neutral-22:   #222632;   /* surface-container-highest dark */
+  --palette-neutral-24:   #262a37;   /* surface-bright dark            */
+  --palette-neutral-30:   #2e3240;
+  --palette-neutral-40:   #444858;
+  --palette-neutral-50:   #5d6173;
+  --palette-neutral-60:   #777b8e;
+  --palette-neutral-70:   #9295a8;
+  --palette-neutral-80:   #adb0c3;
+  --palette-neutral-87:   #c3c6d8;
+  --palette-neutral-90:   #cdd0e2;   /* on-surface dark                */
+  --palette-neutral-92:   #d3d6e8;
+  --palette-neutral-94:   #d9dced;
+  --palette-neutral-96:   #e0e3f2;   /* surface-container-low light    */
+  --palette-neutral-98:   #e9ecf8;   /* surface light                  */
+  --palette-neutral-99:   #f0f3ff;
+  --palette-neutral-100:  #FFFFFF;
+}
+
+/* ── Neutral-Variant (slightly higher chroma, same hue family ~248°) ── */
+:root {
+  --palette-neutral-var-10:  #141a2e;
+  --palette-neutral-var-20:  #272f4a;
+  --palette-neutral-var-28:  #2a2e38;   /* outline-variant dark — barely visible hairline */
+  --palette-neutral-var-30:  #3b4360;
+  --palette-neutral-var-40:  #525b7a;
+  --palette-neutral-var-50:  #6b7494;
+  --palette-neutral-var-60:  #858ea8;
+  --palette-neutral-var-70:  #9a9da8;   /* on-surface-variant dark */
+  --palette-neutral-var-80:  #b8bbcb;
+  --palette-neutral-var-90:  #d5d8ea;
+  --palette-neutral-var-95:  #eaecf8;
+}
+
+/* ── Secondary (desaturated blue-grey) ── */
+:root {
+  --palette-secondary-10:  #121c2b;
+  --palette-secondary-20:  #263141;
+  --palette-secondary-30:  #3d4759;
+  --palette-secondary-40:  #555f71;
+  --palette-secondary-80:  #bcc7dc;
+  --palette-secondary-90:  #d9e3f8;
+}
+
+/* ── Tertiary (violet-purple complement) ── */
+:root {
+  --palette-tertiary-20:  #3b1f5a;
+  --palette-tertiary-30:  #523673;
+  --palette-tertiary-40:  #6b538c;
+  --palette-tertiary-80:  #d5baff;
+  --palette-tertiary-90:  #eedcff;
+}
+
+/* ── Error (M3 standard red) ── */
+:root {
+  --palette-error-20:  #690005;
+  --palette-error-30:  #93000a;
+  --palette-error-40:  #ba1a1a;
+  --palette-error-80:  #ffb4ab;
+  --palette-error-90:  #ffdad6;
+}
+
+
+/* ── SECTION 3: LIGHT COLOR SCHEME (default) ── */
+/* Derived from the same hue family, following M3 inverse rules.              */
+:root,
+html:not([data-theme="dark"]) {
+  /* ── Primary ── */
+  --md-sys-color-primary:               var(--palette-primary-40);
+  --md-sys-color-on-primary:            var(--palette-primary-100);
+  --md-sys-color-primary-container:     var(--palette-primary-90);
+  --md-sys-color-on-primary-container:  var(--palette-primary-10);
+  --md-sys-color-inverse-primary:       var(--palette-primary-80);
+
+  /* ── Secondary ── */
+  --md-sys-color-secondary:               var(--palette-secondary-40);
+  --md-sys-color-on-secondary:            var(--palette-primary-100);
+  --md-sys-color-secondary-container:     var(--palette-secondary-90);
+  --md-sys-color-on-secondary-container:  var(--palette-secondary-10);
+
+  /* ── Tertiary ── */
+  --md-sys-color-tertiary:               var(--palette-tertiary-40);
+  --md-sys-color-on-tertiary:            var(--palette-primary-100);
+  --md-sys-color-tertiary-container:     var(--palette-tertiary-90);
+  --md-sys-color-on-tertiary-container:  var(--palette-tertiary-20);
+
+  /* ── Error ── */
+  --md-sys-color-error:               var(--palette-error-40);
+  --md-sys-color-on-error:            var(--palette-primary-100);
+  --md-sys-color-error-container:     var(--palette-error-90);
+  --md-sys-color-on-error-container:  var(--palette-error-20);
+
+  /* ── Surface / Background ── */
+  /* Soft off-white, same hue family as dark seed — not pure #fff         */
+  --md-sys-color-background:                var(--palette-neutral-98);
+  --md-sys-color-on-background:             var(--palette-neutral-12);
+  --md-sys-color-surface:                   var(--palette-neutral-98);
+  --md-sys-color-surface-dim:               var(--palette-neutral-87);
+  --md-sys-color-surface-bright:            var(--palette-neutral-99);
+  --md-sys-color-surface-container-lowest:  var(--palette-neutral-100);
+  --md-sys-color-surface-container-low:     var(--palette-neutral-96);
+  --md-sys-color-surface-container:         var(--palette-neutral-94);
+  --md-sys-color-surface-container-high:    var(--palette-neutral-92);
+  --md-sys-color-surface-container-highest: var(--palette-neutral-90);
+  --md-sys-color-on-surface:                var(--palette-neutral-12);
+  --md-sys-color-on-surface-variant:        var(--palette-neutral-var-30);
+  --md-sys-color-surface-variant:           var(--palette-neutral-var-90);
+  --md-sys-color-surface-tint:              var(--palette-primary-40);
+
+  /* ── Outline ── */
+  --md-sys-color-outline:          var(--palette-neutral-var-50);
+  --md-sys-color-outline-variant:  var(--palette-neutral-var-80);
+
+  /* ── Inverse ── */
+  --md-sys-color-inverse-surface:     var(--palette-neutral-30);
+  --md-sys-color-inverse-on-surface:  var(--palette-neutral-96);
+
+  /* ── Scrim / Shadow ── */
+  --md-sys-color-scrim:   #000000;
+  --md-sys-color-shadow:  #000000;
+}
+
+
+/* ── SECTION 4: DARK COLOR SCHEME ── */
+/* Surface seed: #10131a (brand-verified, store.liquidgalaxy.eu)              */
+/* on-surface: cool near-white #cdd0e2; on-surface-variant: muted #9a9da8    */
+/* outline-variant: barely-visible hairline #2a2e38                          */
+html[data-theme="dark"] {
+  /* ── Primary ── */
+  --md-sys-color-primary:               var(--palette-primary-80);
+  --md-sys-color-on-primary:            var(--palette-primary-20);
+  --md-sys-color-primary-container:     var(--palette-primary-30);
+  --md-sys-color-on-primary-container:  var(--palette-primary-90);
+  --md-sys-color-inverse-primary:       var(--palette-primary-40);
+
+  /* ── Secondary ── */
+  --md-sys-color-secondary:               var(--palette-secondary-80);
+  --md-sys-color-on-secondary:            var(--palette-secondary-20);
+  --md-sys-color-secondary-container:     var(--palette-secondary-30);
+  --md-sys-color-on-secondary-container:  var(--palette-secondary-90);
+
+  /* ── Tertiary ── */
+  --md-sys-color-tertiary:               var(--palette-tertiary-80);
+  --md-sys-color-on-tertiary:            var(--palette-tertiary-20);
+  --md-sys-color-tertiary-container:     var(--palette-tertiary-30);
+  --md-sys-color-on-tertiary-container:  var(--palette-tertiary-90);
+
+  /* ── Error ── */
+  --md-sys-color-error:               var(--palette-error-80);
+  --md-sys-color-on-error:            var(--palette-error-20);
+  --md-sys-color-error-container:     var(--palette-error-30);
+  --md-sys-color-on-error-container:  var(--palette-error-90);
+
+  /* ── Surface / Background ── */
+  /* Dark mode: brand-verified #10131a seed (cool navy-black, NOT pure black) */
+  --md-sys-color-background:                var(--palette-neutral-6);
+  --md-sys-color-on-background:             var(--palette-neutral-90);
+  --md-sys-color-surface:                   var(--palette-neutral-6);
+  --md-sys-color-surface-dim:               var(--palette-neutral-4);
+  --md-sys-color-surface-bright:            var(--palette-neutral-24);
+  --md-sys-color-surface-container-lowest:  var(--palette-neutral-4);
+  --md-sys-color-surface-container-low:     var(--palette-neutral-10);
+  --md-sys-color-surface-container:         var(--palette-neutral-12);
+  --md-sys-color-surface-container-high:    var(--palette-neutral-17);
+  --md-sys-color-surface-container-highest: var(--palette-neutral-22);
+  --md-sys-color-on-surface:                var(--palette-neutral-90);
+  /* Muted cool gray — verified WCAG AA on dark containers */
+  --md-sys-color-on-surface-variant:        var(--palette-neutral-var-70);
+  --md-sys-color-surface-variant:           var(--palette-neutral-var-30);
+  --md-sys-color-surface-tint:              var(--palette-primary-80);
+
+  /* ── Outline ── */
+  --md-sys-color-outline:          var(--palette-neutral-var-50);
+  /* Barely-visible hairline — use sparingly; prefer spacing over lines */
+  --md-sys-color-outline-variant:  var(--palette-neutral-var-28);
+
+  /* ── Inverse ── */
+  --md-sys-color-inverse-surface:     var(--palette-neutral-90);
+  --md-sys-color-inverse-on-surface:  var(--palette-neutral-17);
+
+  /* ── Scrim / Shadow ── */
+  --md-sys-color-scrim:   #000000;
+  --md-sys-color-shadow:  #000000;
+}
+
+
+/* ── SECTION 5: ELEVATION ── */
+/* Dark mode shadows need more presence against very dark background          */
+:root {
+  --md-sys-elevation-shadow-0: none;
+  --md-sys-elevation-shadow-1:
+    0px 1px 2px  rgba(0, 0, 0, 0.40),
+    0px 1px 3px 1px rgba(0, 0, 0, 0.20);
+  --md-sys-elevation-shadow-2:
+    0px 1px 2px  rgba(0, 0, 0, 0.40),
+    0px 2px 6px 2px rgba(0, 0, 0, 0.20);
+  --md-sys-elevation-shadow-3:
+    0px 1px 3px  rgba(0, 0, 0, 0.40),
+    0px 4px 8px 3px rgba(0, 0, 0, 0.20);
+  --md-sys-elevation-shadow-4:
+    0px 2px 3px  rgba(0, 0, 0, 0.40),
+    0px 6px 10px 4px rgba(0, 0, 0, 0.20);
+  --md-sys-elevation-shadow-5:
+    0px 4px 4px  rgba(0, 0, 0, 0.40),
+    0px 8px 12px 6px rgba(0, 0, 0, 0.20);
+
+  /* Surface-tint overlays */
+  --md-sys-elevation-overlay-0:  rgba(0, 92, 230, 0.00);
+  --md-sys-elevation-overlay-1:  rgba(0, 92, 230, 0.05);
+  --md-sys-elevation-overlay-2:  rgba(0, 92, 230, 0.08);
+  --md-sys-elevation-overlay-3:  rgba(0, 92, 230, 0.11);
+  --md-sys-elevation-overlay-4:  rgba(0, 92, 230, 0.12);
+  --md-sys-elevation-overlay-5:  rgba(0, 92, 230, 0.14);
+}
+
+html[data-theme="dark"] {
+  --md-sys-elevation-overlay-0:  rgba(173, 198, 255, 0.00);
+  --md-sys-elevation-overlay-1:  rgba(173, 198, 255, 0.05);
+  --md-sys-elevation-overlay-2:  rgba(173, 198, 255, 0.08);
+  --md-sys-elevation-overlay-3:  rgba(173, 198, 255, 0.11);
+  --md-sys-elevation-overlay-4:  rgba(173, 198, 255, 0.12);
+  --md-sys-elevation-overlay-5:  rgba(173, 198, 255, 0.14);
+}
+
+
+/* ── SECTION 6: TYPOGRAPHY SCALE ── */
+:root {
+  /* Font families */
+  --md-sys-typescale-font-family-brand: 'Inter', 'Google Sans', 'Roboto', system-ui, sans-serif;
+  --md-sys-typescale-font-family-plain: 'Inter', 'Roboto', system-ui, sans-serif;
+  --md-sys-typescale-font-family-mono:  ui-monospace, 'JetBrains Mono', 'SFMono-Regular', 'Cascadia Code', Consolas, 'Liberation Mono', monospace;
+
+  /* Display — Large */
+  --md-sys-typescale-display-large-size:          57px;
+  --md-sys-typescale-display-large-line-height:   64px;
+  --md-sys-typescale-display-large-tracking:      -0.25px;
+  --md-sys-typescale-display-large-weight:        400;
+
+  /* Display — Medium */
+  --md-sys-typescale-display-medium-size:         45px;
+  --md-sys-typescale-display-medium-line-height:  52px;
+  --md-sys-typescale-display-medium-tracking:     0px;
+  --md-sys-typescale-display-medium-weight:       400;
+
+  /* Display — Small */
+  --md-sys-typescale-display-small-size:          36px;
+  --md-sys-typescale-display-small-line-height:   44px;
+  --md-sys-typescale-display-small-tracking:      0px;
+  --md-sys-typescale-display-small-weight:        400;
+
+  /* Headline — Large */
+  --md-sys-typescale-headline-large-size:         32px;
+  --md-sys-typescale-headline-large-line-height:  40px;
+  --md-sys-typescale-headline-large-tracking:     0px;
+  --md-sys-typescale-headline-large-weight:       400;
+
+  /* Headline — Medium */
+  --md-sys-typescale-headline-medium-size:        28px;
+  --md-sys-typescale-headline-medium-line-height: 36px;
+  --md-sys-typescale-headline-medium-tracking:    0px;
+  --md-sys-typescale-headline-medium-weight:      400;
+
+  /* Headline — Small */
+  --md-sys-typescale-headline-small-size:         24px;
+  --md-sys-typescale-headline-small-line-height:  32px;
+  --md-sys-typescale-headline-small-tracking:     0px;
+  --md-sys-typescale-headline-small-weight:       400;
+
+  /* Title — Large */
+  --md-sys-typescale-title-large-size:            22px;
+  --md-sys-typescale-title-large-line-height:     28px;
+  --md-sys-typescale-title-large-tracking:        0px;
+  --md-sys-typescale-title-large-weight:          400;
+
+  /* Title — Medium */
+  --md-sys-typescale-title-medium-size:           16px;
+  --md-sys-typescale-title-medium-line-height:    24px;
+  --md-sys-typescale-title-medium-tracking:       0.15px;
+  --md-sys-typescale-title-medium-weight:         500;
+
+  /* Title — Small */
+  --md-sys-typescale-title-small-size:            14px;
+  --md-sys-typescale-title-small-line-height:     20px;
+  --md-sys-typescale-title-small-tracking:        0.1px;
+  --md-sys-typescale-title-small-weight:          500;
+
+  /* Body — Large */
+  --md-sys-typescale-body-large-size:             16px;
+  --md-sys-typescale-body-large-line-height:      26px;   /* 1.625 — comfortable reading rhythm */
+  --md-sys-typescale-body-large-tracking:         0.5px;
+  --md-sys-typescale-body-large-weight:           400;
+
+  /* Body — Medium */
+  --md-sys-typescale-body-medium-size:            14px;
+  --md-sys-typescale-body-medium-line-height:     22px;
+  --md-sys-typescale-body-medium-tracking:        0.25px;
+  --md-sys-typescale-body-medium-weight:          400;
+
+  /* Body — Small */
+  --md-sys-typescale-body-small-size:             12px;
+  --md-sys-typescale-body-small-line-height:      16px;
+  --md-sys-typescale-body-small-tracking:         0.4px;
+  --md-sys-typescale-body-small-weight:           400;
+
+  /* Label — Large */
+  --md-sys-typescale-label-large-size:            14px;
+  --md-sys-typescale-label-large-line-height:     20px;
+  --md-sys-typescale-label-large-tracking:        0.1px;
+  --md-sys-typescale-label-large-weight:          500;
+
+  /* Label — Medium */
+  --md-sys-typescale-label-medium-size:           12px;
+  --md-sys-typescale-label-medium-line-height:    16px;
+  --md-sys-typescale-label-medium-tracking:       0.5px;
+  --md-sys-typescale-label-medium-weight:         500;
+
+  /* Label — Small */
+  --md-sys-typescale-label-small-size:            11px;
+  --md-sys-typescale-label-small-line-height:     16px;
+  --md-sys-typescale-label-small-tracking:        0.5px;
+  --md-sys-typescale-label-small-weight:          500;
+}
+
+
+/* ── SECTION 7: SHAPE SCALE ── */
+:root {
+  --md-sys-shape-corner-none:        0px;
+  --md-sys-shape-corner-extra-small: 4px;
+  --md-sys-shape-corner-small:       8px;
+  --md-sys-shape-corner-medium:      12px;
+  --md-sys-shape-corner-large:       16px;
+  --md-sys-shape-corner-extra-large: 28px;
+  --md-sys-shape-corner-full:        9999px;
+}
+
+
+/* ── SECTION 8: SPACING SCALE (8px grid) ── */
+:root {
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+}
+
+
+/* ── SECTION 9: MOTION / EASING ── */
+:root {
+  --md-sys-motion-easing-standard:         cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-easing-standard-decel:   cubic-bezier(0, 0, 0, 1);
+  --md-sys-motion-easing-standard-accel:   cubic-bezier(0.3, 0, 1, 1);
+  --md-sys-motion-easing-emphasized:       cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-easing-emphasized-decel: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --md-sys-motion-easing-emphasized-accel: cubic-bezier(0.3, 0, 0.8, 0.15);
+
+  --md-sys-motion-duration-short-1:   50ms;
+  --md-sys-motion-duration-short-2:   100ms;
+  --md-sys-motion-duration-short-3:   150ms;
+  --md-sys-motion-duration-short-4:   200ms;
+  --md-sys-motion-duration-medium-1:  250ms;
+  --md-sys-motion-duration-medium-2:  300ms;
+  --md-sys-motion-duration-medium-3:  350ms;
+  --md-sys-motion-duration-medium-4:  400ms;
+  --md-sys-motion-duration-long-1:    450ms;
+  --md-sys-motion-duration-long-2:    500ms;
+}
+
+
+/* ── SECTION 10: LAYOUT DIMENSIONS ── */
+:root {
+  --sidebar-w:   280px;
+  --topbar-h:    72px; /* Increased from 64px for breathing space */
+  --toc-w:       220px;
+  --content-max: 740px;
+}
+
+
+/* ── SECTION 11: PREFERS-REDUCED-MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --md-sys-motion-duration-short-1:   0ms;
+    --md-sys-motion-duration-short-2:   0ms;
+    --md-sys-motion-duration-short-3:   0ms;
+    --md-sys-motion-duration-short-4:   0ms;
+    --md-sys-motion-duration-medium-1:  0ms;
+    --md-sys-motion-duration-medium-2:  0ms;
+    --md-sys-motion-duration-medium-3:  0ms;
+    --md-sys-motion-duration-medium-4:  0ms;
+    --md-sys-motion-duration-long-1:    0ms;
+    --md-sys-motion-duration-long-2:    0ms;
+  }
+}

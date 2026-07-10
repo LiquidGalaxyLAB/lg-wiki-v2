@@ -1,0 +1,6 @@
+{
+  "name": "Service Account Contribution Portal",
+  "description": "A Next.js portal allowing contributors to submit markdown content via a Service Account architecture, creating  automatically via the GitHub API.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liquid Galaxy Docs — Contribution Portal</title>
+  <meta name="description" content="Official documentation and contribution portal for the Liquid Galaxy open-source project.">
+  <link rel="icon" type="image/png" href="public/assets/lg-logo.png">
+
+  <!--
+    ══════════════════════════════════════════════════════════
+    NO-FOUC THEME INIT — must run before first paint.
+    Reads localStorage; falls back to prefers-color-scheme.
+    Sets data-theme on <html> so CSS tokens activate instantly.
+    ══════════════════════════════════════════════════════════
+  -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('lg-theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = saved || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <!-- ── Fonts ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- ── Design System CSS ── -->
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="layout.css">
+
+  <!-- ── Syntax Highlighting Theme ── -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs2015.min.css">
+
+  <!-- ── Material Web Components (via CDN) ── -->
+  <script type="module">
+    import "https://esm.run/@material/web/all.js";
+    import { styles as typescaleStyles } from "https://esm.run/@material/web/typography/md-typescale-styles.js";
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+
+  <!-- ── Import maps for Marked ── -->
+  <script type="importmap">
+    {
+      "imports": {
+        "marked": "https://esm.run/marked",
+        "marked-highlight": "https://esm.run/marked-highlight",
+        "highlight.js": "https://esm.run/highlight.js"
+      }
+    }
+  </script>
+
+  <!-- ── Theme Manager (non-blocking) ── -->
+  <script src="theme.js" defer></script>
+
+  <!-- ── App Logic ── -->
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════
+       HEADER / TOP APP BAR
+       ══════════════════════════════════════════════════════ -->
+  <header class="app-bar" role="banner">
+
+    <!-- Brand -->
+    <div class="brand">
+      <md-icon-button
+        id="menu-toggle"
+        aria-label="Toggle navigation drawer"
+        aria-expanded="false"
+        aria-controls="drawer"
+      >
+        <span class="material-icons" aria-hidden="true">menu</span>
+      </md-icon-button>
+
+      <a href="#" class="brand" aria-label="Liquid Galaxy Docs — home" style="text-decoration:none;">
+        <div class="brand-logo" aria-hidden="true">
+          <img src="public/assets/wiki-logo.png" alt="" width="28" height="28"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <span class="brand-abbr" style="display:none;">LG</span>
+        </div>
+        <h1>Liquid Galaxy <span>Docs</span></h1>
+      </a>
+    </div>
+
+
+
+    <!-- Actions -->
+    <div class="actions">
+      <!-- Global Search Button (MDN-style with shortcut indicator) -->
+      <button id="header-search-btn" class="header-search-trigger" aria-label="Search docs">
+        <img src="public/assets/searchbar.svg" class="search-icon" style="width: 20px; height: 20px;" alt="Search">
+        <span class="search-text">Search</span>
+        <span class="search-shortcut-key">/</span>
+      </button>
+
+      <!-- Theme toggle -->
+      <md-icon-button
+        id="theme-toggle"
+        aria-label="Switch to dark mode"
+        title="Toggle dark mode"
+      >
+        <span class="material-icons" aria-hidden="true">dark_mode</span>
+      </md-icon-button>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════════
+       BODY LAYOUT
+       ══════════════════════════════════════════════════════ -->
+  <div class="layout-body">
+
+    <!-- Overlay scrim for mobile drawer -->
+    <div id="drawer-scrim" class="drawer-scrim" aria-hidden="true"></div>
+
+    <!-- ── Sidebar / Navigation Drawer ── -->
+    <aside
+      class="drawer collapsed"
+      id="drawer"
+      aria-label="Documentation navigation"
+      role="navigation"
+    >
+      <div class="drawer-header" aria-hidden="true">Documentation</div>
+      <nav>
+        <md-list id="nav-list" role="list"></md-list>
+      </nav>
+    </aside>
+
+    <!-- ── Main Content ── -->
+    <main class="content-area" id="main-content" tabindex="-1">
+      <div class="content-wrapper">
+
+        <!-- Article (populated by app.js) -->
+        <article
+          id="markdown-content"
+          class="markdown-body"
+          aria-live="polite"
+          aria-label="Documentation content"
+        >
+          <p>Loading documentation…</p>
+        </article>
+
+        <!-- On This Page — TOC (populated by app.js) -->
+        <aside
+          class="toc-sidebar"
+          id="toc-sidebar"
+          aria-label="On this page"
+          style="display:none;"
+        >
+          <nav id="toc-nav" aria-label="Table of contents"></nav>
+        </aside>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       FOOTER
+       ══════════════════════════════════════════════════════ -->
+  <!-- 
+  <footer class="site-footer" role="contentinfo">
+    <p>© 2024 Liquid Galaxy Project · Powered by the open-source community</p>
+    <a
+      href="https://www.liquidgalaxy.eu/"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Visit the official Liquid Galaxy website (opens in new tab)"
+    >
+      liquidgalaxy.eu ↗
+    </a>
+  </footer>
+  -->
+
+
+
+  <!-- MDN-Style Custom Search Modal -->
+  <div id="mdn-search-modal" class="mdn-search-modal" aria-hidden="true">
+    <div class="mdn-search-content">
+      <div class="mdn-search-header" id="mdn-search-header">
+        <!-- <img src="public/assets/searchbar.svg" class="search-icon" style="width: 24px; height: 24px;" alt="Search"> -->
+        <input type="text" id="dialog-search-input" placeholder="Search documentation..." autocomplete="off" spellcheck="false" />
+        <button id="close-search-btn" class="mdn-search-close" aria-label="Close search">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div id="search-dialog-results" class="mdn-search-results">
+        <div class="search-empty">Type to start searching...</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

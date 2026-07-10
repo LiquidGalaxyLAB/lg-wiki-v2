@@ -1,0 +1,12 @@
+/*
+ * styles.css — Forwarding shim
+ *
+ * All styles now live in the split CSS files below.
+ * This file is kept for backward compatibility and as an entry point
+ * for any tooling that references styles.css directly.
+ *
+ * Load order matters: tokens → components → layout
+ */
+@import url('./tokens.css');
+@import url('./components.css');
+@import url('./layout.css');
