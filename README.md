@@ -80,35 +80,6 @@ Once served, open `http://localhost:<port>` in your browser to view the portal.
 └── extract.js          # Developer utility script for log exports
 ```
 
----
-
-## 🔧 Content Utility Scripts
-
-If you are maintaining the repository or importing documentation in bulk, you can use the included Node.js scripts:
-
-### 1. Migrating from Appwrite Backups (`convert_backup.js`)
-If you have a legacy Appwrite backup database file (e.g., `backup_db.json`), you can convert all active entries into clean markdown files and automatically download all hosted assets locally:
-```bash
-node convert_backup.js [path/to/backup_db.json]
-```
-This will:
-- Parse all `active` status documents.
-- Download hosted Appwrite images and save them under `output/content/images/`.
-- Rewrite markdown image source URLs to local relative paths.
-- Generate a clean `index.json` registry file mapping all pages.
-
-### 2. Auditing & Formatting Markdown Files (`fix_headings.js`)
-To audit and resolve bulk formatting issues (such as invalid YAML frontmatter colon syntax or empty TOC lists due to missing markdown header symbols):
-```bash
-node fix_headings.js [path/to/content/dir]
-```
-This will:
-- Check for unquoted title string colons in YAML headers (which break parses).
-- Convert standalone bold patterns (e.g., `**Bold Title**`) into clean standard headings (`## Bold Title`).
-- Inject a fallback `## Overview` heading if no section headings are found.
-
----
-
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE) - see the [LICENSE](LICENSE) file for details.
