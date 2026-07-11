@@ -1,0 +1,37 @@
+{
+  "name": "Liquid Galaxy Docs",
+  "short_name": "LG Docs",
+  "description": "Official documentation and contribution portal for the Liquid Galaxy open-source project.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#0d1117",
+  "background_color": "#0d1117",
+  "lang": "en",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "public/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "public/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Search Docs",
+      "short_name": "Search",
+      "description": "Open the search dialog",
+      "url": "./#search",
+      "icons": [{ "src": "public/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

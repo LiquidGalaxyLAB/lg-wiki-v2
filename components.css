@@ -554,6 +554,8 @@ html[data-theme="dark"] .markdown-body blockquote {
   opacity: 0.9;
 }
 
+
+
 .lg-badge {
   display: inline-flex;
   align-items: center;
@@ -795,30 +797,67 @@ html[data-theme="dark"] .markdown-body blockquote {
   initial-value: 100%;
 }
 
-.mdn-search-header::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 4px;
-  background: linear-gradient(
-    to right,
-    #4285F4 0 var(--mixBlueRed),
-    #EA4335 var(--mixBlueRed) var(--mixRedYellow),
-    #FBBC05 var(--mixRedYellow) var(--mixYellowGreen),
-    #34A853 var(--mixYellowGreen) 100%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease, --mixBlueRed 0.5s, --mixRedYellow 0.5s, --mixYellowGreen 0.5s;
+.mdn-search-header {
+  position: relative;
+  --blue: oklch(63.04% 0.18 259.96);
+  --red: oklch(62.57% 0.2058 29.08);
+  --yellow: oklch(83.04% 0.1698 83.99);
+  --green: oklch(64.75% 0.1603 148.5);
 }
 
-.mdn-search-header.is-typing::after {
-  opacity: 1;
-  animation: googleVoice 1s ease infinite alternate;
+.mdn-search-header .googleVoice {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 10px;        /* 5px blur row + 5px sharp line row */
+  opacity: 0;
+  pointer-events: none;
+  overflow: visible;
+  transition: opacity 0.3s ease;
 }
+
+.mdn-search-header.is-typing .googleVoice {
+  opacity: 1;
+}
+
+/* Shared gradient for both elements */
+.mdn-search-header .googleVoice .rect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(
+    to right,
+    var(--blue) 0 var(--mixBlueRed),
+    var(--red) var(--mixBlueRed) var(--mixRedYellow),
+    var(--yellow) var(--mixRedYellow) var(--mixYellowGreen),
+    var(--green) var(--mixYellowGreen) 100%
+  );
+  transition: --mixBlueRed 0.5s, --mixRedYellow 0.5s, --mixYellowGreen 0.5s;
+}
+
+/* Sharp line — sits at the very bottom */
+.mdn-search-header .googleVoice .rect:not(.blur) {
+  bottom: 0;
+  top: auto;
+}
+
+.mdn-search-header.is-typing .googleVoice .rect {
+  animation: googleVoice 2s ease infinite alternate;
+}
+
+/* Blur row — sits ABOVE the sharp line, glow bleeds downward over it */
+.mdn-search-header .googleVoice .rect.blur {
+  top: 0;
+  height: 5px;                          /* taller = more color mass for the glow */
+  filter: blur(10px) ;        /* tight blur + saturate keeps colors rich & vivid */
+}
+
 
 @keyframes googleVoice {
   0% {
-    --mixBlueRed: 80%;
+    --mixBlueRed: 80%;  
     --mixRedYellow: 88%;
     --mixYellowGreen: 96%;
     --mixGreenYellow: 100%;

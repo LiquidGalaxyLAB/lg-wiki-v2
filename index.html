@@ -5,7 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Liquid Galaxy Docs — Contribution Portal</title>
   <meta name="description" content="Official documentation and contribution portal for the Liquid Galaxy open-source project.">
-  <link rel="icon" type="image/png" href="public/assets/lg-logo.png">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="public/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="public/icons/favicon-16x16.png">
+
+  <!-- ── PWA Manifest ── -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- ── PWA / Theme meta ── -->
+  <meta name="theme-color" content="#0d1117">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- ── Apple iOS home-screen PWA support ── -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="LG Docs">
+  <link rel="apple-touch-icon" sizes="180x180" href="public/icons/apple-touch-icon.png">
 
   <!--
     ══════════════════════════════════════════════════════════
@@ -188,12 +203,28 @@
         <button id="close-search-btn" class="mdn-search-close" aria-label="Close search">
           <span class="material-icons">close</span>
         </button>
+        <div slot="voice" class="googleVoice">
+          <div class="rect blur"></div>
+          <div class="rect"></div>
+        </div>
       </div>
       <div id="search-dialog-results" class="mdn-search-results">
         <div class="search-empty">Type to start searching...</div>
       </div>
     </div>
   </div>
+
+  <!-- ── Service Worker Registration ── -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker
+          .register('./sw.js')
+          .then((reg) => console.log('[PWA] Service Worker registered, scope:', reg.scope))
+          .catch((err) => console.warn('[PWA] Service Worker registration failed:', err));
+      });
+    }
+  </script>
 
 </body>
 </html>
