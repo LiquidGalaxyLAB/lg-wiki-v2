@@ -1,87 +1,48 @@
+# <img src="public/icons/icon-512.png" alt="Liquid Galaxy Logo" width="96" height="96" align="center"> LG Wiki
 
-# Liquid Galaxy Docs & Contribution Portal (v2)
+LG Wiki is a modern, fast, and responsive documentation hub for the Liquid Galaxy project. It functions as an immersive documentation viewer, allowing developers, contributors, and users to browse guides and documentation fetched dynamically from the remote repository.
 
-Welcome to the **Liquid Galaxy Docs & Contribution Portal**-a modern, fast, and responsive Single-Page Application (SPA) designed to serve as the documentation hub for the Liquid Galaxy project. 
-
-This portal functions both as a documentation viewer and as a seamless contribution bridge, enabling contributors to write, edit, and publish markdown documentation directly from the web browser by automatically staging pull requests via the GitHub API.
-
----
-
-## 🚀 Key Features
-
-- **Dynamic Content Fetching**: Retrieves and parses markdown documentation and index files in real time directly from the public [LiquidGalaxyLAB/lg-wiki-content](https://github.com/LiquidGalaxyLAB/lg-wiki-content) repository.
-- **Modern Markdown Rendering**: Renders standard Markdown dynamically with inline copyable code snippets, custom table formatting, syntax highlighting (via `highlight.js`), and automated asset/image URL rewriting.
-- **Streamlined Contribution Workflow**: Allows users to log in with a GitHub Personal Access Token (PAT) to submit new documents or update existing ones. The portal automatically handles:
-  - Base64 encoding and uploading embedded local images/blobs.
-  - Automatically renaming and referencing uploaded images in the markdown.
-  - Registering the document inside the global `index.json` registry.
-  - Creating a pull request (PR) to the core repository for review.
-- **Premium User Experience & Aesthetics**:
-  - Built with a custom Material-Design-inspired design system (`tokens.css`, `components.css`, `layout.css`).
-  - Native dark/light mode toggle with `localStorage` persistence and FOUC (Flash of Unstyled Content) prevention.
-  - Active-state navigation highlighting and smooth page transitions.
-  - Interactive Table of Contents (TOC) with scroll-aware highlighting (Intersection Observer).
-  - Browser-history-compatible hash navigation (`#file-name.md`).
-- **MDN-Style Search**: Highly responsive client-side global search modal with keyboard shortcuts (`/` to open, `Escape` to close), arrow-key list traversal, and real-time result highlighting.
-- **Built-in Utility Scripts**: Contains Node.js utilities for bulk content migrations, YAML frontmatter resolution, and heading adjustments.
+> [!NOTE]
+> **Why LG Wiki?:** The Liquid Galaxy project is a complex, cluster-based multi-display system. Having a centralized, easily accessible wiki enables the global open-source community, Google Summer of Code (GSoC) contributors, and new users to share knowledge, document setups, and learn about the system.
 
 ---
 
-## 🛠️ Architecture & Tech Stack
+## Features
 
-This portal is designed to be extremely lightweight, serverless, and easy to deploy:
-- **Core Logic**: Pure HTML5 and client-side JavaScript (ES modules). No compilation or bundling required.
-- **UI & Icons**: Google Material Web Components (`@material/web`) via CDN.
-- **Markdown Parsing**: `marked` combined with `marked-highlight` and `highlight.js`.
-- **API Integration**: GitHub REST API client via `Octokit` ESM package.
-- **Hosting**: Serves statically from any standard web host, GitHub Pages, or locally.
-
----
-
-## 🏃 Getting Started
-
-### Prerequisites
-- A modern web browser.
-- (Optional) Node.js (only required to run utility scripts or local HTTP servers).
-
-### Running Locally
-Since the portal is a static SPA, it does not require a build step. You can run it locally using any static file server:
-
-- **Using Node.js (`npx`):**
-  ```bash
-  npx serve .
-  ```
-- **Using Python:**
-  ```bash
-  python -m http.server 8000
-  ```
-- **Using VS Code:**
-  Install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension and click **Go Live**.
-
-Once served, open `http://localhost:<port>` in your browser to view the portal.
+- **🌍 Immersive Documentation Viewer**
+  - Displays structured articles and guides dynamically fetched from our remote content repository.
+  - Responsive design supporting layout zones, active-state navigation, and an interactive Table of Contents (TOC).
+- **📱 Progressive Web App (PWA)**
+  - Full offline support with a multi-tiered Service Worker caching strategy.
+  - Installable on desktop, Android, and iOS for a native app experience.
 
 ---
 
-## 📦 Project Structure
+## 🌐 Deployment
 
-```text
-├── index.html          # Main SPA entrypoint & viewport setup
-├── app.js              # Core application logic, routing, TOC, and search
-├── github.js           # GitHub API Octokit service wrapper for read/PR workflows
-├── theme.js            # Light/Dark mode state management & toggle handlers
-├── markdown-setup.js   # Marked parsing configuration & copy-button hooks
-├── tokens.css          # Design system core design tokens (colors, variables, transitions)
-├── layout.css          # Page scaffolding, sidebar responsive drawer, layout zones
-├── components.css      # Styled atomic components (buttons, search dialog, TOC, badges)
-├── LICENSE             # MIT License file
-├── metadata.json       # App configuration metadata
-├── convert_backup.js   # Utility: Migrates legacy Appwrite JSON exports to Markdown & assets
-├── fix_headings.js     # Utility: Audits and fixes YAML frontmatter & missing headings in MD files
-└── extract.js          # Developer utility script for log exports
-```
+The web portal is hosted at: **[www.liquidgalaxy.eu/2024/05/lg-wiki.html#content-wrapper](https://www.liquidgalaxy.eu/2024/05/lg-wiki.html#content-wrapper)**.
+It is optimized to load instantly, work offline, and serve as a reliable reference on the field.
+
+---
+
+## Technical Design & Caching
+
+To maintain high performance and offline capability:
+- **App Shell Cache:** Local HTML, CSS, JS, and CDN dependencies (Google Fonts, Material Web Components, syntax highlight libraries) are cached using a **Cache-First** strategy.
+- **Dynamic Content Cache:** Markdown files from the content repository are fetched using a **Network-First** strategy with graceful cache fallback when offline.
+
+---
+
+## Contributing
+
+Contributions to the LG Wiki and its content are welcome! Since the app is a read-only viewer, contributions are made directly on GitHub:
+1. Clone or fork the [lg-wiki-content Repository](https://github.com/LiquidGalaxyLAB/lg-wiki-content).
+2. Follow the [How to Contribute Guide](https://github.com/LiquidGalaxyLAB/lg-wiki-content/blob/main/how-to-contribute-to-lg-wiki.md) for detailed instructions on documentation submissions.
+3. Open a pull request on GitHub with your markdown changes.
+
+---
 
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE) - see the [LICENSE](LICENSE) file for details.
 
-Copyright (c) 2026 Dev T Gadani and the Liquid Galaxy LAB community.

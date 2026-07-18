@@ -135,6 +135,13 @@ function renderHome() {
       </div>
       <h1>Explore Liquid Galaxy</h1>
       <p>Welcome to LG Wiki! Discover clear documentation, implementation guides, and architectural insights for the Liquid Galaxy project — your go-to resource for both beginners and enthusiasts.</p>
+      <div class="hero-search-container">
+        <button id="hero-search-overlay" class="hero-search-btn" aria-label="Search documentation">
+          <span class="material-icons search-icon">search</span>
+          <span class="search-placeholder">Search documentation...</span>
+          <span class="search-shortcut">/</span>
+        </button>
+      </div>
     </div>
 
     <!-- 5 Recent Wiki Entries -->
@@ -419,7 +426,8 @@ function setupEventListeners() {
 
   // Hero search overlay click listener (attached dynamically since renderHome destroys/recreates it)
   document.addEventListener('click', (e) => {
-    if (e.target && e.target.id === 'hero-search-overlay') {
+    const heroSearchOverlay = e.target.closest('#hero-search-overlay');
+    if (heroSearchOverlay) {
       openSearch();
     }
   });

@@ -1,6 +1,6 @@
 {
-  "name": "Liquid Galaxy Docs",
-  "short_name": "LG Docs",
+  "name": "LG Wiki",
+  "short_name": "LG Wiki",
   "description": "Official documentation and contribution portal for the Liquid Galaxy open-source project.",
   "start_url": "./",
   "scope": "./",
